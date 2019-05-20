@@ -1,0 +1,127 @@
+<odoo>
+  <data>
+
+<!--   <record model="ir.ui.view" id="bh_vat.tree">-->
+<!--      <field name="name">VAT Code</field>-->
+<!--      <field name="model">vat.configuration</field>-->
+<!--      <field name="arch" type="xml">-->
+<!--        <tree>-->
+<!--          <field name="name"/>-->
+<!--          <field name="code_name"/>-->
+<!--          <field name="tax_id"/>-->
+<!--            <field name="tax_scope"/>-->
+<!--          <field name="description"/>-->
+<!--        </tree>-->
+<!--      </field>-->
+<!--    </record>-->
+
+<!--     <record model="ir.ui.view" id="bh_vat.tree_return">-->
+<!--      <field name="name">VAT Return</field>-->
+<!--      <field name="model">vat.return</field>-->
+<!--      <field name="arch" type="xml">-->
+<!--        <tree>-->
+<!--            <field name="name"/>-->
+<!--            <field name="category"/>-->
+<!--            <field name="date"/>-->
+<!--            <field name="reference"/>-->
+<!--            <field name="partner_id"/>-->
+<!--            <field name="account_id"/>-->
+<!--            <field name="vat_code_ref"/>-->
+<!--            <field name="tax_id"/>-->
+<!--            <field name="base_amount"/>-->
+<!--            <field name="tax_amount"/>-->
+<!--        </tree>-->
+<!--      </field>-->
+<!--    </record>-->
+
+
+<!--    <record model="ir.ui.view" id="bh_vat.filling">-->
+<!--      <field name="name">vat forms</field>-->
+<!--      <field name="model">vat_configuration</field>-->
+<!--      <field name="arch" type="xml">-->
+<!--        <form>-->
+<!--           <header>-->
+<!--          <button string="Print" class="oe_highlight" type="object"/>-->
+<!--          </header>-->
+
+<!--          <sheet>-->
+<!--            <div class="oe_title">-->
+<!--             <h1>-->
+<!--               <field name="name"/>-->
+<!--             </h1>-->
+<!--            </div>-->
+<!--          </sheet>-->
+<!--        </form>-->
+<!--      </field>-->
+<!--    </record>-->
+
+
+<!--      <record id="invoice_vat_code" model="ir.ui.view">-->
+<!--        <field name="name">invoice_vat</field>-->
+<!--        <field name="model">account.invoice</field>-->
+<!--        <field name="inherit_id" ref="account.invoice_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--         <xpath expr="//field[@name='invoice_line_tax_ids']" position="before">-->
+<!--                <field name="invoice_id" invisible="1"/>-->
+<!--                <field name="vat_code_id" domain="[('tax_scope','=','sale')]" />-->
+<!--         </xpath>-->
+<!--        </field>-->
+<!--     </record>-->
+
+
+
+      <record id="sale_type" model="ir.ui.view">
+        <field name="name">sales_type</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="x_sale_type"/>
+            </xpath>
+          <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="x_sale_person"/>
+            </xpath>
+        </field>
+     </record>
+
+
+       <record id="sale_line_date" model="ir.ui.view">
+        <field name="name">sales_line_date</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='customer_lead']" position="after">
+                <field name="x_expected_date"/>
+            </xpath>
+        </field>
+     </record>
+
+
+      <record id="sale_line_res" model="ir.ui.view">
+        <field name="name">sales_line_res</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='order_lines']//field[@name='state']" position="after">
+                  <page string="Reservation Summary">
+                      <field name="x_resevation">
+                          <tree editable="button" >
+                              <control>
+                                  <create string="Add a product"/>
+                              </control>
+                              <field name="warehouse" />
+                              <field name="available_stock" />
+                              <field name="displayed_qty" />
+                              <field name="damaged_qty" />
+                              <field name="reserved_qty"/>
+                              <field name="remain_qty"/>
+                          </tree>
+                      </field>
+                </page>
+          </xpath>
+        </field>
+     </record>
+
+   
+  </data>
+</odoo>
